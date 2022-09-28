@@ -6,6 +6,17 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: "/products/:kw?",
+    props: true,
+    name: "Products",
+    component: () => import("../views/ProductsView.vue"),
+  },
+  {
+    path: "/pro_details",
+    name: "ProDetails",
+    component: () => import("../views/ProDetails.vue"),
+  },
+  {
     path: "/",
     name: "inde",
     component: IndexView,

@@ -17,6 +17,8 @@
           class="input-kw"
           type="text"
           placeholder="请输入您要搜索的内容"
+          v-model="kw"
+          @keyup.enter="goto"
         />
         <div class="seek" tabindex="-1">
           <div class="actived">
@@ -31,12 +33,12 @@
             <div id="srdz">私人订制</div>
           </div>
         </div>
-        <a href="javascript:void(0)" class="rt"
+        <router-link :to="'/products/' + kw" class="rt"
           ><img
             id="search"
             src="https://web.codeboy.com/xuezi/img/header/search.png"
             alt="搜索"
-        /></a>
+        /></router-link>
       </div>
       <div class="rt">
         <ul class="lf">
@@ -85,7 +87,20 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      kw: "",
+    }
+  },
+  methods: {
+    goto() {
+      const path = "/products/" + this.kw
+      if (this.$route.path === path) return
+      this.$router.push(path)
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

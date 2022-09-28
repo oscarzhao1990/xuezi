@@ -7,73 +7,56 @@
           src="https://web.codeboy.com/xuezi/img/index/computer_icon.png"
           alt=""
         />
-        热销单品 /3F
+        {{ title }}
       </div>
       <div class="floor_content">
         <div class="food">
           <div class="desc">
-            <p class="name">灵越 燃7000系列</p>
+            <p class="name">{{ items[0].title }}</p>
             <p class="details">
-              酷睿双核i5处理器|256GB SSD| 8GB内存<br />英特尔HD显卡620含共享显卡内存
+              {{ items[0].details }}
             </p>
-            <p class="price">￥4999.00</p>
-            <div id="one" class="view">查看详情</div>
+            <p class="price">￥{{ items[0].price }}</p>
+            <div @click="goto(0)" id="one" class="view">查看详情</div>
           </div>
-          <img
-            src="https://web.codeboy.com/xuezi/img/index/study_computer_img1.png"
-            alt=""
-          />
+          <img v-src="items[0].pic" alt="" />
         </div>
         <div class="food">
           <div class="desc">
-            <p class="name">颜值 框不住</p>
+            <p class="name">{{ items[1].title }}</p>
             <p class="details">
-              酷睿双核i5处理器|256GB SSD| 8GB内存<br />英特尔HD显卡620含共享显卡内存
+              {{ items[1].details }}
             </p>
-            <p class="price">￥6888.00</p>
-            <div id="two" class="view">查看详情</div>
+            <p class="price">￥{{ items[1].price }}</p>
+            <div @click="goto(1)" id="two" class="view">查看详情</div>
           </div>
-          <img
-            src="https://web.codeboy.com/xuezi/img/index/study_computer_img2.png"
-          />
+          <img v-src="items[1].pic" />
         </div>
         <div class="food">
           <div class="desc">
-            <p class="name">戴尔XPS13 13.3英寸<br />微边框笔记本</p>
-            <p class="price">￥4600.00</p>
-            <div id="three" class="view">查看详情</div>
+            <p class="name">{{ items[2].title }}</p>
+            <p class="price">￥{{ items[2].price }}</p>
+            <div @click="goto(2)" id="three" class="view">查看详情</div>
           </div>
-          <img
-            src="https://web.codeboy.com/xuezi/img/index/study_computer_img3.png"
-            alt=""
-          />
+          <img v-src="items[2].pic" alt="" />
         </div>
         <div class="product">
-          <img
-            src="https://web.codeboy.com/xuezi/img/index/study_computer_img3.png"
-            alt=""
-          />
-          <h2>戴尔(DELL)XPS13-9360-R1609 13.3英寸微边框笔记本电脑</h2>
-          <p>￥4600.00</p>
-          <a href="product_details.html" id="four">查看详情</a>
+          <img v-src="items[3].pic" alt="" />
+          <h2>{{ items[3].title }}</h2>
+          <p>￥{{ items[3].price }}</p>
+          <a @click="goto(3)" id="four">查看详情</a>
         </div>
         <div class="product">
-          <img
-            src="https://web.codeboy.com/xuezi/img/index/study_computer_img3.png"
-            alt=""
-          />
-          <h2>戴尔(DELL)XPS13-9360-R1609 13.3英寸微边框笔记本电脑</h2>
-          <p>￥4600.00</p>
-          <a href="product_details.html" id="five">查看详情</a>
+          <img v-src="items[4].pic" alt="" />
+          <h2>{{ items[4].title }}</h2>
+          <p>￥{{ items[4].price }}</p>
+          <a @click="goto(4)" id="five">查看详情</a>
         </div>
         <div class="product">
-          <img
-            src="https://web.codeboy.com/xuezi/img/index/study_computer_img3.png"
-            alt=""
-          />
-          <h2>戴尔(DELL)XPS13-9360-R1609 13.3英寸微边框笔记本电脑</h2>
-          <p>￥4600.00</p>
-          <a href="product_details.html" id="fix">查看详情</a>
+          <img v-src="items[5].pic" alt="" />
+          <h2>{{ items[5].title }}</h2>
+          <p>￥{{ items[5].price }}</p>
+          <a @click="goto(5)" id="fix">查看详情</a>
         </div>
       </div>
     </div>
@@ -88,6 +71,12 @@ export default {
     },
     items: {
       type: Array,
+    },
+  },
+  methods: {
+    goto(index) {
+      const lid = this.items[index].href.split("=")[1]
+      this.$router.push("/pro_details?lid=" + lid)
     },
   },
 }

@@ -15,9 +15,15 @@
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
-    <index-floor title="首页推荐 /1F" :items="newArrivalItems"></index-floor>
-    <index-floor title="最新上架 /2F" :items="recommendedItems"></index-floor>
-    <index-floor title="热销单品 /3F" :items="topSaleItems"></index-floor>
+    <index-floor
+      title="首页推荐 /1F"
+      :items="data.newArrivalItems"
+    ></index-floor>
+    <index-floor
+      title="最新上架 /2F"
+      :items="data.recommendedItems"
+    ></index-floor>
+    <index-floor title="热销单品 /3F" :items="data.topSaleItems"></index-floor>
   </div>
 </template>
 

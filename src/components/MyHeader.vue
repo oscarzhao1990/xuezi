@@ -67,11 +67,17 @@
             ><b>|</b>
           </li>
         </ul>
-        <ul class="lf login_info">
+        <ul class="lf login_info" v-if="!uname">
           <li>
-            <a href="register.html" title="注册新用户">&nbsp;注册</a><b>|</b>
+            <router-link to="/register" title="注册新用户"
+              >&nbsp;注册</router-link
+            ><b>|</b>
           </li>
-          <li><a href="login.html" title="用户登录">登录</a></li>
+          <li><router-link to="/login" title="用户登录">登录</router-link></li>
+        </ul>
+        <ul class="lf login_info" v-else>
+          <li>欢迎：{{ uname }}<b>|</b></li>
+          <li><span @click="changeUname(null)">退出</span></li>
         </ul>
       </div>
     </header>
@@ -87,13 +93,18 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex"
 export default {
+  computed: {
+    ...mapState(["uname"]),
+  },
   data() {
     return {
       kw: "",
     }
   },
   methods: {
+    ...mapMutations(["changeUname"]),
     goto() {
       const path = "/products/" + this.kw
       if (this.$route.path === path) return

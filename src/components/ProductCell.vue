@@ -1,16 +1,16 @@
 <template>
   <div class="product" :id="p.lid">
-    <router-link href="product_details.html?lid=${p.lid}"
-      ><img src="${p.pic}" alt="${p.title}"
+    <router-link :to="'/pro_details?lid=' + p.lid"
+      ><img v-src="p.pic" :alt="p.title"
     /></router-link>
     <div>
       <p>
-        <span class="price">￥${p.price}</span
-        ><a
-          href="product_details.html?lid=${p.lid}"
+        <span class="price">￥{{ p.price }}</span
+        ><router-link
+          :to="'/pro_details?lid=' + p.lid"
           class="title"
           title="${p.title}"
-          >${p.title}</a
+          >{{ p.title }}</router-link
         >
       </p>
       <div>
@@ -33,3 +33,4 @@ export default {
 </script>
 
 <style lang="scss" scoped></style>
+<style scoped src="../assets/css/products.css"></style>

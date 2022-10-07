@@ -25,7 +25,21 @@
               ></product-cell>
             </div>
             <!--分页条-->
-            <div class="pager"></div>
+            <div class="pages" v-if="data">
+              <span @click="now--" :class="{ disabled: now === 1 }"
+                >上一页</span
+              >
+              <span
+                v-for="n in data.pageCount"
+                :key="n"
+                @click="now = n"
+                :class="{ active: now === n }"
+                >{{ n }}</span
+              >
+              <span @click="now++" :class="{ disabled: now === data.pageCount }"
+                >下一页</span
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -84,11 +98,12 @@ export default {
   data() {
     return {
       data: null,
+      now: 1,
     }
   },
   methods: {
     getData() {
-      const url = `data/product/list.php?pno=1&kw=${this.kw}`
+      const url = `data/product/list.php?pno=${this.now}&kw=${this.kw}`
       this.axios.get(url).then((res) => {
         console.log(res)
         this.data = res.data
@@ -98,8 +113,43 @@ export default {
   mounted() {
     this.getData()
   },
+  watch: {
+    now() {
+      this.getData()
+    },
+    $route() {
+      this.getData()
+      this.now = 1
+    },
+  },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.pages {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  background-color: #eee;
+  > span {
+    display: block;
+    margin: 5px;
+    background-color: #ddd;
+    padding: 5px 10px;
+    color: #52a5e3;
+    user-select: none;
+    cursor: pointer;
+    &.active {
+      background-color: #52a5e3;
+      color: #fff;
+      pointer-events: none;
+    }
+    &.disabled {
+      background-color: #ccc;
+      color: #bbb;
+      pointer-events: none;
+    }
+  }
+}
+</style>
 <style scoped src="../assets/css/products.css"></style>

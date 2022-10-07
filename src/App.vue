@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-header></my-header>
+    <my-header v-show="!$route.meta.hideHeader"></my-header>
     <router-view></router-view>
     <my-footer></my-footer>
   </div>
